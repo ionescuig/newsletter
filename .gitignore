@@ -1,0 +1,16 @@
+local.*
+
+db.sqlite3
+
+uenv/
+venv/
+wenv/
+
+media/
+
+staticfiles/
+__pycache__/
+.idea/
+
+*.pyc
+*.key

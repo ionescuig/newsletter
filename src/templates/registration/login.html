@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Newsletter | Login
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <h1 class="text-center">Login Form</h1>
+            <hr>
+            <div class="col-lg-8 offset-lg-2">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" class="btn btn-success" value="Login">
+                    <spam class="float-sm-right">
+                        <small><a href="{% url 'password_reset' %}">Forgot password</a></small>
+                    </spam>
+                </form>
+{#                <hr>#}
+{#                <small><a href="{% url 'password_reset' %}">Forgot password</a></small>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}

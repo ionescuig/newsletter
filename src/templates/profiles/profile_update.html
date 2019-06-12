@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Newsletter | Profile Update
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <h1 class="text-center">Profile Update</h1>
+            <hr>
+            <div class="col-lg-10 offset-lg-1">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" class="btn btn-success" value="Update">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
