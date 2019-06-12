@@ -1,4 +1,4 @@
 # Newsletter
 ### with django-summernote WYSIWYG editor.
 
-work in progress...
+_work in progress..._
