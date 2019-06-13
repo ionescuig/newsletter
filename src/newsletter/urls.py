@@ -18,6 +18,9 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.views.generic import TemplateView
 
+handler404 = 'profiles.views.handler404'
+handler500 = 'profiles.views.handler500'
+
 urlpatterns = [
     path('', TemplateView.as_view(template_name='base.html'), name='home'),
     path('admin/', admin.site.urls),

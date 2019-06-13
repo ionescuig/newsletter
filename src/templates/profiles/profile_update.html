@@ -15,6 +15,9 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     <input type="submit" class="btn btn-success" value="Update">
+                    <spam class="float-sm-right">
+                        <small><a href="{% url 'password_change' %}">Change password</a></small>
+                    </spam>
                 </form>
             </div>
         </div>
