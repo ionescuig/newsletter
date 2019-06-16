@@ -14,4 +14,4 @@ _work in progress..._
     - custom password reset
 - articles app:
     - tests for existing article
-    - permissions for updating articles
+    - permissions for updating and publishing articles
