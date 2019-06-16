@@ -6,7 +6,7 @@ _work in progress..._
 ---
 
 - static files hosted on AWS S3
-- custom errors 403, 404 and 500
+- custom error pages 403, 404 and 500
 - profile app:
     - sign up with email confirmation
     - tests for existing email
