@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Newsletter | Articles
+{% endblock %}
+
+{%  block head_extra %}
+    <!-- Custom content CSS: Bootstrap 3 -->
+    <link rel="stylesheet" href="{% static 'css/content.css' %}">
+{% endblock head_extra %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <h1 class="text-center">Articles</h1>
+            <hr>
+            <div>
+                {% for article in object_list %}
+                    <div class="card mb-4">
+                        {% if article.published %}
+                            <div class="card-header">
+                                <h4 class="mb-0">
+                                    <a href="{% url "articles:detail" slug=article.slug %}">{{ article.title }}</a>
+                                </h4>
+                                <small class="text-muted mb-1">
+                                    by {{ article.author }} |
+                                    {{ article.published_date|date:"D, d M, Y" }}
+                                    at {{ article.published_date|date:"H:i" }}
+                                </small>
+                            </div>
+                        {% else %}
+                            <div class="card-header" style="background-color: rgba(255,0,0,.2);">
+                                <h4 class="mb-0">
+                                    <a href="{% url "articles:detail" slug=article.slug %}">{{ article.title }}</a>
+                                </h4>
+                                <small class="text-muted mb-1">
+                                    by {{ article.author }} | <spam style="color: red"> Draft</spam>
+                                </small>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text">{{ article.get_html|truncatechars_html:120 }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

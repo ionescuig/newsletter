@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Newsletter | {{ object }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <h1 class="text-center">Update Article</h1>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.title|as_crispy_field }}
+                {{ form.content.label }}{{ form.content }}
+                <p>
+                    Published date:
+                    {% if object.published_date %}
+                        {{ object.published_date }}
+                    {% else %}
+                        <spam style="color: red">Draft</spam>
+                    {% endif %}
+                </p>
+                <input type="submit" class="btn btn-success" value="Update">
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Newsletter | {{ object }}
+{% endblock %}
+
+{%  block head_extra %}
+    <!-- Custom content CSS: Bootstrap 3 -->
+    <link rel="stylesheet" href="{% static 'css/content.css' %}">
+{% endblock head_extra %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <h1 class="text-center">{{ object }}</h1>
+            <h6 class="text-center text-muted">
+                {% if object.author == request.user %}
+                    {% if not article.published %}
+                        <spam style="color: red">Draft<br></spam>
+                    {% endif %}
+                    {% if article.published_date %}
+                        Published: {{ article.published_date|date:"d/m/Y" }} at {{ article.published_date|date:"H:i" }}
+                    {% else %}
+                        Not published
+                    {% endif %}
+
+                    <br> Updated: {{ article.updated_date|date:"d/m/Y" }} at {{ article.updated_date|date:"H:i" }}
+                    <br> Created: {{ article.created_date|date:"d/m/Y" }} at {{ article.created_date|date:"H:i" }}
+                {% else %}
+                    <spam>
+                        by {{ object.author }} |
+                        {{ article.published_date|date:"d/m/Y" }} at {{ article.published_date|date:"H:i" }}
+                    </spam>
+                {% endif %}
+            </h6>
+
+            <hr>
+            <div>
+                <p>{{ object.get_html }}</p>
+            </div>
+            {% if user.is_authenticated and object.author == user %}
+                <hr>
+                <a class="btn btn-primary" href="{% url 'articles:update' slug=object.slug %}">Update</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

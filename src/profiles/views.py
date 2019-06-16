@@ -1,22 +1,10 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render, render_to_response
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.shortcuts import redirect, render
+from django.views.generic import TemplateView, UpdateView
 
 from .forms import SignUpForm
 from .models import Profile
-
-
-def handler404(request, exception, template_name="404.html"):
-    response = render_to_response("404.html")
-    response.status_code = 404
-    return response
-
-
-def handler500(request):
-    response = render_to_response("500.html")
-    response.status_code = 500
-    return response
 
 
 def activate(request, code):
