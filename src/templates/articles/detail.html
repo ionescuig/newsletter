@@ -43,6 +43,9 @@
             {% if user.is_authenticated and object.author == user %}
                 <hr>
                 <a class="btn btn-primary" href="{% url 'articles:update' slug=object.slug %}">Update</a>
+                {% if not object.published %}
+                    <a class="btn btn-primary float-right" href="{% url 'articles:publish' slug=object.slug %}">Publish</a>
+                {% endif %}
             {% endif %}
         </div>
     </div>
