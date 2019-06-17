@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
 
 from .forms import ArticleForm
@@ -25,7 +26,7 @@ def publish_article_view(request, *args, **kwargs):
         if not article.published_date:
             article.published_date = timezone.now()
         article.save()
-        return redirect(article.get_absolute_url())
+        return redirect('home')
     # if the user is not the author raise Page Not Found error
     else:
         raise Http404()
@@ -86,6 +87,18 @@ class ArticlesUpdateView(UserPassesTestMixin, UpdateView):
     """
     form_class = ArticleForm
     template_name = 'articles/update.html'
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
+
+    def get_queryset(self):
+        return Article.objects.all()
+
+
+class ArticlesDeleteView(UserPassesTestMixin, DeleteView):
+    form_class = ArticleForm
+    template_name = 'articles/delete.html'
+    success_url = reverse_lazy('articles:list')
 
     def test_func(self):
         return self.request.user == self.get_object().author

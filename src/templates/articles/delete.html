@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Newsletter | Delete {{ object }}
+{% endblock %}
+
+{% block head_extra %}
+    <!-- Custom content CSS: Bootstrap 3 -->
+    <link rel="stylesheet" href="{% static 'css/content.css' %}">
+{% endblock head_extra %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <h1 class="text-center">
+                Are you sure you want to delete?
+            </h1>
+            <hr>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        {{ article.title }}
+                        {% if not article.published %}
+                            <small class="text-danger"> - Draft</small>
+                        {% endif %}
+                    </h4>
+                    <small class="text-muted mb-1">
+                        {% if article.published_date %}
+                            Published: {{ article.published_date|date:"d/m/Y" }} at {{ article.published_date|date:"H:i" }}
+                        {% else %}
+                            Not published
+                        {% endif %}
+                        <br> Updated: {{ article.updated_date|date:"d/m/Y" }} at {{ article.updated_date|date:"H:i" }}
+                        <br> Created: {{ article.created_date|date:"d/m/Y" }} at {{ article.created_date|date:"H:i" }}
+                    </small>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ article.get_html }}</p>
+                </div>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="text-center">
+                    <input type="submit" class="btn btn-danger" value="Yes, delete article">
+                    <a class="btn btn-primary" href="{% url 'articles:detail' slug=object.slug %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

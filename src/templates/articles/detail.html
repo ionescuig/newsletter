@@ -35,16 +35,17 @@
                     </spam>
                 {% endif %}
             </h6>
-
             <hr>
+
             <div>
                 <p>{{ object.get_html }}</p>
             </div>
             {% if user.is_authenticated and object.author == user %}
                 <hr>
                 <a class="btn btn-primary" href="{% url 'articles:update' slug=object.slug %}">Update</a>
+                <a class="btn btn-danger float-right" href="{% url 'articles:delete' slug=object.slug %}">Delete</a>
                 {% if not object.published %}
-                    <a class="btn btn-primary float-right" href="{% url 'articles:publish' slug=object.slug %}">Publish</a>
+                    <br><a class="btn btn-primary mt-2" href="{% url 'articles:publish' slug=object.slug %}">Publish</a>
                 {% endif %}
             {% endif %}
         </div>
