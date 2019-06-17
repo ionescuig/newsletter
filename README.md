@@ -15,3 +15,5 @@ _work in progress..._
 - articles app:
     - tests for existing article
     - permissions for updating, publishing and deleting articles
+- admin site:
+    - changed displayed, searchable, editable fields
