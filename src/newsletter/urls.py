@@ -19,6 +19,9 @@ from django.urls import include, path
 
 from articles.views import HomePageView
 
+handler403 = 'profiles.views.handler403'
+handler404 = 'profiles.views.handler404'
+handler500 = 'profiles.views.handler500'
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),

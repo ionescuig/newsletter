@@ -1,13 +1,37 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from django.views.generic import TemplateView, UpdateView
+
 
 from .forms import SignUpForm
 from .models import Profile
 
 
+# custom errors 403, 404, 500
+def handler403(request, exception, template_name="403.html"):
+    response = render_to_response("403.html")
+    response.status_code = 403
+    return response
+
+
+def handler404(request, exception, template_name="404.html"):
+    response = render_to_response("404.html")
+    response.status_code = 404
+    return response
+
+
+def handler500(request, template_name="404.html"):
+    response = render_to_response("500.html")
+    response.status_code = 500
+    return response
+
+
 def activate(request, code):
+    """
+    Function triggered from the user email activation link.
+    If the activation key is valid activates the user and profile.
+    """
     try:
         profile = Profile.objects.get(activation_key=code)
     except:
@@ -51,6 +75,9 @@ class AccountInvalidView(TemplateView):
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Only the user's profile can be modified.
+    """
     model = User
     template_name = 'profiles/profile_update.html'
     fields = ['first_name', 'last_name', 'email']
