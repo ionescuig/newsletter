@@ -33,4 +33,4 @@ class Article(models.Model):
         return super(Article, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ['-updated_date']
+        ordering = ['title']

@@ -2,4 +2,12 @@ from django.contrib import admin
 from .models import Profile
 
 
-admin.site.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    readonly_fields = ('user', )
+    fields = ('user', 'activation_key', 'activated')
+    list_display = ['user', 'activated']
+    list_filter = ['activated']
+    search_fields = ['user']
+
+
+admin.site.register(Profile, ProfileAdmin)
