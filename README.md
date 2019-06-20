@@ -1,7 +1,6 @@
-# Newsletter
+# [Newsletter](https://gi-newsletter.herokuapp.com/)
 #### with django-summernote WYSIWYG editor.
 
-_work in progress..._
 
 ---
 
@@ -9,7 +8,7 @@ _work in progress..._
 - custom error pages 403, 404 and 500
 - profile app:
     - sign up with email confirmation
-    - tests for existing email
+    - tests for existing email (optional: if is a company email)
     - custom password change
     - custom password reset
 - articles app:

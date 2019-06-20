@@ -50,6 +50,8 @@ def signup_view(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         email_address = form['email'].value()
+        # for checking if the new user is part of the company to the next if can be added:
+        # and email_address.endswith('@company.com')
         if form.is_valid() and not User.objects.filter(email__exact=email_address):
             user = form.save()
             user.is_active = False
